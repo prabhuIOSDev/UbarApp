@@ -11,6 +11,8 @@ struct LocationSearchView: View {
     @State private var currentLoaction: String = ""
     @State private var destinationLocation: String = ""
     
+    @StateObject var viewModel = LocationSearchViewModel()
+    
     
     var body: some View {
         VStack {
@@ -30,12 +32,12 @@ struct LocationSearchView: View {
                 }
                 
                 VStack{
-                    TextField("Current Location", text: $currentLoaction)
-                        .frame(height: 30)
+                    TextField(" Current Location", text: $currentLoaction)
+                        .frame(height: 35)
                         .background(Color.gray.opacity(0.1))
                         .padding(.trailing)
-                    TextField("Destination Location", text: $destinationLocation)
-                        .frame(height: 30)
+                    TextField(" Destination Location", text:$viewModel.queryFragment)
+                        .frame(height: 35)
                         .background(Color.gray.opacity(0.6))
                         .padding(.trailing)
                     
@@ -43,11 +45,24 @@ struct LocationSearchView: View {
                 }
             }
             .padding(.horizontal)
+            .padding(.top,64)
             
+            Divider()
+                .padding(.vertical)
             
             // list view ...
             
+            ScrollView{
+                VStack(alignment:.leading){
+                    ForEach(viewModel.result ,id: \.self){ result in
+                        LocationSearchResultCell(title: result.title, subtitle: result.subtitle)
+                           .padding(.vertical,5)
+                    }
+                }
+            }
+            
         }
+        .background(.white)
     }
 }
 

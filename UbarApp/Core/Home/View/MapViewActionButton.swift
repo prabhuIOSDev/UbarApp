@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct MapViewActionButton: View {
+    @Binding var locationServiceView : Bool
     var body: some View {
-        Button{}label: {
-            Image(systemName: "line.horizontal.3")
+        Button{
+            withAnimation(.snappy){
+                locationServiceView.toggle()
+            }
+        }label: {
+            Image(systemName: !locationServiceView ? "line.horizontal.3": "arrow.left")
                 .font(.title2)
                 .imageScale(.medium)
                 .padding()
@@ -24,5 +29,5 @@ struct MapViewActionButton: View {
 }
 
 #Preview {
-    MapViewActionButton()
+    MapViewActionButton(locationServiceView: .constant(true))
 }

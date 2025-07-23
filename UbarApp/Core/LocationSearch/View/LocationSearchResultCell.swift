@@ -8,11 +8,36 @@
 import SwiftUI
 
 struct LocationSearchResultCell: View {
+    let title:String
+    let subtitle:String
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack{
+            Image(systemName: "mappin.circle.fill")
+                .resizable()
+                .foregroundColor(.blue)
+                .frame(width: 30, height: 30)
+                
+        
+            VStack(alignment:.leading,spacing: 4){
+                Text(title)
+                    .font(.footnote)
+                    .fontWeight(.semibold)
+                
+                Text(subtitle)
+                    .font(.caption)
+                    .fontWeight(.light)
+                    .foregroundColor(.gray)
+                
+                Divider()
+            }
+            .padding(.leading,8)
+            .padding(.vertical,8)
+        
+        }
+        .padding(.leading)
     }
 }
 
 #Preview {
-    LocationSearchResultCell()
+    LocationSearchResultCell(title: "Bangalore", subtitle: "124 Main Road")
 }
